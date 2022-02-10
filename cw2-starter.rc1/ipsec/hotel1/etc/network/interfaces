@@ -1,0 +1,12 @@
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+# The primary network interface
+auto eth0
+iface eth0 inet static
+        address 242.142.188.2
+        netmask 255.255.254.0
+        network 242.142.188.0
+        broadcast 242.142.189.255
+        gateway 242.142.188.1
