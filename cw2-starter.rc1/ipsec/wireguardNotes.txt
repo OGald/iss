@@ -1,0 +1,16 @@
+root@wireguard:~# wg genkey | sudo tee /etc/wireguard/private.key
+ALHWO07gec4IJx/fMxFcgFsq02eNiHIEdk4LAez0gmc=
+
+sudo cat /etc/wireguard/private.key | wg pubkey | sudo tee /etc/wireguard/public.key
+9KPWO1Y0nJhZvcb20qBGTDr2YJWAsbuY9ReyPx0E7kA=
+
+[Interface]
+PrivateKey = ALHWO07gec4IJx/fMxFcgFsq02eNiHIEdk4LAez0gmc=
+Address = 192.168.87.0/24
+ListenPort = 51820
+SaveConfig = true
+
+PostUp = ufw route allow in on wg0 out on eth2
+PostUp = iptables -t nat -I POSTROUTING -o eth2 -j MASQUERADE
+PreDown = ufw route delete allow in on wg0 out on eth2
+PreDown = iptables -t nat -D POSTROUTING -o eth2 -j MASQUERADE
