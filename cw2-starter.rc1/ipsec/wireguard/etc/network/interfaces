@@ -18,3 +18,7 @@ iface eth2 inet static
         network 213.1.133.96
         broadcast 213.1.133.127
         gateway 213.1.133.101
+
+
+        
+
