@@ -1,0 +1,41 @@
+netkit-phase1[1547]: --- Starting Netkit phase 1 init script ---
+netkit-phase1[1547]: Mounting /home/csc on /hosthome...
+netkit-phase1[1547]: Mounting /home/csc/iss/cw2-starter.rc1/ipsec on /hostlab ..
+.
+netkit-phase1[1547]: Configuring host name...
+netkit-phase1[1547]: Running 'resolvconf -u' to generate /etc/resolv.conf
+netkit-phase1[1547]: Copying shared files from /hostlab/shared/...
+netkit-phase1[1547]: Copying staff1 specific files from /hostlab/staff1/...
+netkit-phase1[1547]: --- Netkit phase 1 initialization terminated ---
+netkit-phase2[1678]: --- Starting Netkit phase 2 init script ---
+netkit-phase2[1678]: >>> Running shared startup script...
+netkit-phase2[1684]: net.ipv4.ip_forward = 1
+netkit-phase2[1684]: net.ipv6.conf.all.disable_ipv6 = 1
+netkit-phase2[1684]: net.ipv6.conf.default.disable_ipv6 = 1
+netkit-phase2[1684]: net.ipv6.conf.lo.disable_ipv6 = 1
+netkit-phase2[1678]: >>> End of shared startup script.
+netkit-phase2[1678]: >>> Running staff1 specific startup script...
+netkit-phase2[1752]: Warning: `/etc/wireguard/wg0.conf' is world accessible
+netkit-phase2[1752]: [#] ip link add wg0 type wireguard
+netkit-phase2[1752]: [#] wg setconf wg0 /dev/fd/63
+netkit-phase2[1752]: [#] ip -4 address add 192.168.87.6 dev wg0
+netkit-phase2[1752]: [#] ip link set mtu 1420 up dev wg0
+netkit-phase2[1752]: [#] ip -4 route add 192.168.2.0/24 dev wg0
+netkit-phase2[1678]: >>> End of staff1 specific startup script.
+netkit-phase2[1678]: ##################################################
+netkit-phase2[1678]: Lab directory (host): /home/csc/iss/cw2-starter.rc1/ipsec
+netkit-phase2[1678]: Version: 2021.rc1
+netkit-phase2[1678]: Author:  Peter Norris
+netkit-phase2[1678]: Email:   pn@warwick.ac.uk
+netkit-phase2[1678]: Web:     <none>
+netkit-phase2[1678]: Description:
+netkit-phase2[1678]: WM242 CW2
+netkit-phase2[1678]: ##################################################
+netkit-phase2[1678]: --- Netkit phase 2 initialization terminated ---
+
+staff1 login: root (automatic login)
+
+Linux staff1 5.10.4 #1 Mon Jan 25 03:08:46 PST 2021 x86_64
+Welcome to Netkit
+
+root@staff1:~#    

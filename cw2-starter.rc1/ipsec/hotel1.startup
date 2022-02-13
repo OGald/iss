@@ -4,3 +4,4 @@
 #ip route add default via 213.1.133.97/27
 
 ifup -a
+wg-quick up wg0   #Need this line to grab wg0.conf file to set up hotel1 as wireguard client
