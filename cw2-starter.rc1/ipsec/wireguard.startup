@@ -18,7 +18,6 @@
 #ip route add default via 213.1.133.101/27
 
 ifup -a
-wg-quick up wg0   #Need this line to grab wg0.conf file to set up the wireguard server
 
 
 
