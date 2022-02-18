@@ -1,0 +1,42 @@
+self signed root ca certificate and key
+openssl req -x509 -newkey rsa:1024 -days 3650 \
+-keyout /etc/ipsec.d/private/CA_cert.pem \
+-out /etc/ipsec.d/cacerts/CA_cert.pem \
+-subj "/C=UK/O=Uni of Warwick/OU=CSC/CN=CA.irony.cyber.test"
+
+
+generate private key for strongswan server
+openssl req -newkey rsa:1024 \
+-keyout /etc/ipsec.d/private/strongswan_key.pem \
+-subj "/C=UK/O=Uni of Warwick/OU=CSC/CN=gw1.irony.cyber.test" \
+
+generate CSR for strongswan
+openssl req -new \
+-key /etc/ipsec.d/private/strongswan_key.pem \
+-out /etc/ipsec.d/reqs/strongswan_req.pem \
+-subj "/C=UK/O=Uni of Warwick/OU=CSC/CN=gw1.irony.cyber.test" \
+
+issue CA signature for strongswan CSR
+openssl x509 -req -in /etc/ipsec.d/reqs/strongswan_req.pem \
+-CA /etc/ipsec.d/cacerts/CA_cert.pem \
+-CAkey /etc/ipsec.d/private/CA_key.pem \
+-CAcreateserial \
+-out /etc/ipsec.d/certs/strongswan_cert.pem
+
+generate client private key
+openssl req -newkey rsa:1024 \
+-keyout /etc/ipsec.d/private/hotel1_key.pem \
+-subj "/C=UK/O=Uni of Warwick/OU=CSC/CN=hotel1.irony.cyber.test"
+
+generate client CSR
+openssl req -new \
+-key /etc/ipsec.d/private/hotel1_key.pem \
+-out /etc/ipsec.d/reqs/hotel1_req.pem \
+-subj "/C=UK/O=Uni of Warwick/OU=CSC/CN=hotel1.irony.cyber.test"
+
+issue CA signature for hotel1 CSR
+openssl x509 -req -in /etc/ipsec.d/reqs/hotel1_req.pem \
+-CA /etc/ipsec.d/cacerts/CA_cert.pem \
+-CAkey /etc/ipsec.d/private/CA_key.pem \
+-CAcreateserial \
+-out /etc/ipsec.d/certs/hotel1_cert.pem
