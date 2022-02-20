@@ -1,0 +1,6 @@
+ifconfig eth0 192.168.87.8/28
+route add default gw 192.168.87.9
+
+resolvconf -u
+
+service dnsmasq start
