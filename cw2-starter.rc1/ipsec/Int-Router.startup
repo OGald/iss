@@ -9,16 +9,10 @@ ifup -a
 resolvconf -u
 
 iptables -F
-#iptables -P INPUT   DROP
-#iptables -P FORWARD DROP
-#iptables -P OUTPUT  DROP
-
 iptables -I FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT
 
-#Internal Network
 iptables -A FORWARD -i eth0 -j ACCEPT
 
-#Int-DNS
 iptables -A FORWARD -i eth1 -p tcp --dport 53 -j ACCEPT
 iptables -A FORWARD -i eth1 -p udp --dport 53 -j ACCEPT
 

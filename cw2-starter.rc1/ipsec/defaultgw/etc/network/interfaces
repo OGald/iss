@@ -4,7 +4,7 @@ iface lo inet loopback
 
 # Internally facing
 auto eth0
-iface eth1 inet static
+iface eth0 inet static
         address 192.168.87.1
         netmask 255.255.255.0
         network 192.168.87.0

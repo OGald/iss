@@ -3,11 +3,7 @@
 #ip route add default via 192.168.87.9
 
 ifup -a
-#<<<<<<< HEAD
 resolvconf -u
-
 wg-quick up wg0   
-#=======
-#>>>>>>> c7c79ff6d2b19514032316b7fae660175a308103
 
 
