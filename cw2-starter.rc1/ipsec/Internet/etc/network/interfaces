@@ -1,0 +1,31 @@
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+# Internally facing
+auto eth0
+iface eth0 inet static
+        address 213.1.133.121
+        netmask 255.255.255.224
+        network 213.1.133.96
+        broadcast 213.1.133.127
+        #gateway 213.1.133.120
+        
+#External DNS facing
+auto eth1
+iface eth1 inet static
+        address 8.8.8.1
+        netmask 255.255.255.0
+        network 8.8.8.0
+        broadcast 8.8.8.255
+
+        
+#Hotel LAN facing
+auto eth2
+iface eth2 inet static
+        address 242.142.188.1
+        netmask 255.255.254.0
+        network 242.142.188.0
+        broadcast 242.142.188.255
+
+        

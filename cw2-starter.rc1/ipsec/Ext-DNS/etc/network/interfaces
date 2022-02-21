@@ -1,0 +1,14 @@
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+# Internally facing
+auto eth0
+iface eth0 inet static
+        address 8.8.8.8
+        netmask 255.255.255.0
+        network 8.8.8.0
+        broadcast 8.8.8.255
+        gateway 8.8.8.1
+
+        

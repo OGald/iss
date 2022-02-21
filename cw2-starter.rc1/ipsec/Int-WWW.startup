@@ -1,8 +1,11 @@
-ifconfig eth0 213.1.133.122
+#ip addr add 213.1.133.122/27 dev eth1
+#ip link set up dev eth1
 
+#ip route add default via 213.1.133.121
+
+
+ifup -a
 resolvconf -u
-
-route add default gw 213.1.133.121
 
 a2enmod ssl
 a2ensite default-ssl

@@ -1,0 +1,24 @@
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+#CompLAN facing
+auto eth0
+iface eth0 inet static
+        address 192.168.87.9
+        netmask 255.255.255.0
+        network 192.168.87.0
+        broadcast 192.168.87.255
+        
+
+#pubLint facing
+auto eth1
+iface eth1 inet static
+        address 213.1.133.120
+        netmask 255.255.255.0
+        network 213.1.133.96
+        broadcast 213.1.133.126
+        gateway 213.1.133.121
+
+
+        
