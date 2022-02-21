@@ -10,3 +10,30 @@
 
 ifup -a
 resolvconf -u
+ip route add default via 213.1.133.120
+
+iptables -F
+
+iptables -I FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT
+
+#DNS
+iptables -A FORWARD -i eth0 -p tcp --dport 53 -j ACCEPT
+iptables -A FORWARD -i eth0 -p udp --dport 53 -j ACCEPT
+
+#Int-WWW
+iptables -A FORWARD -i eth0 -p tcp --dport 80 -j ACCEPT
+iptables -A FORWARD -i eth0 -p tcp --dport 443 -j ACCEPT
+
+iptables -A FORWARD -i eth2 -p tcp --dport 80 -j ACCEPT
+iptables -A FORWARD -i eth2 -p tcp --dport 443 -j ACCEPT
+
+iptables -t nat -A PREROUTING -i eth2 -p icmp  -d 213.1.133.98 -j DNAT --to-destination 192.168.87.2
+iptables -t nat -A PREROUTING -i eth2 -p icmp  -d 213.1.133.99 -j DNAT --to-destination 192.168.87.3
+iptables -t nat -A PREROUTING -i eth2 -p icmp  -d 213.1.133.102 -j DNAT --to-destination 192.168.87.1
+
+
+#--dport 80
+#--dport 443
+#iptables -t nat -A POSTROUTING -o eth4 -j SNAT --to-source 213.1.33.101
+
+
