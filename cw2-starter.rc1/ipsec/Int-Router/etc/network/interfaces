@@ -15,9 +15,9 @@ iface eth0 inet static
 auto eth1
 iface eth1 inet static
         address 213.1.133.120
-        netmask 255.255.255.0
+        netmask 255.255.255.224
         network 213.1.133.96
-        broadcast 213.1.133.126
+        broadcast 213.1.133.127
         gateway 213.1.133.121
 
 

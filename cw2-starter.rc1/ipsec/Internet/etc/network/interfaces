@@ -9,7 +9,8 @@ iface eth0 inet static
         netmask 255.255.255.224
         network 213.1.133.96
         broadcast 213.1.133.127
-        #gateway 213.1.133.120
+        gateway 213.1.133.120
+        
         
 #External DNS facing
 auto eth1
@@ -26,6 +27,6 @@ iface eth2 inet static
         address 242.142.188.1
         netmask 255.255.254.0
         network 242.142.188.0
-        broadcast 242.142.188.255
+        broadcast 242.142.189.255
 
         
