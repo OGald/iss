@@ -11,12 +11,15 @@ resolvconf -u
 iptables -F
 iptables -I FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT
 
+iptables -A FORWARD -p udp --dport 500 -j ACCEPT
+iptables -A FORWARD -p udp --dport 4500 -j ACCEPT
+
 iptables -A FORWARD -i eth0 -j ACCEPT
 
 iptables -A FORWARD -i eth1 -p tcp --dport 53 -j ACCEPT
 iptables -A FORWARD -i eth1 -p udp --dport 53 -j ACCEPT
 
-#DNS
+#DNAT
 iptables -t nat -A PREROUTING -i eth1 -p tcp --dport 53 -j DNAT --to-destination 192.168.87.4
 iptables -t nat -A PREROUTING -i eth1 -p udp --dport 53 -j DNAT --to-destination 192.168.87.4
 

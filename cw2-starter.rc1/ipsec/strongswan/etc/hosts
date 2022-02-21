@@ -1,0 +1,12 @@
+# Allowing the machine to resolve names without the use of a DNS server
+213.1.133.98    gw1.irony.cyber.test
+213.1.133.99    gw2.irony.cyber.test
+213.1.133.100   www.irony.cyber.test
+
+192.168.87.1    defaultgw.irony.cyber.test
+192.168.87.2    strongswan.irony.cyber.test
+192.168.87.3    wireguard.irony.cyber.test
+192.168.87.6    staff1.irony.cyber.test
+192.168.87.7    staff2.irony.cyber.test
+
+

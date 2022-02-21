@@ -5,4 +5,10 @@
 ifup -a
 resolvconf -u
 
+iptables -A INPUT -p udp --dport 500 -j ACCEPT
+iptables -A INPUT -p udp --dport 4500 -j ACCEPT
+
+iptables -t nat -A POSTROUTING -o eth0 -s 242.142.188.2 -j ACCEPT
+iptables -t nat -A POSTROUTING -o eth0 -s 242.142.188.2 -j MASQUERADE
+
 systemctl start ipsec.service
