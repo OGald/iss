@@ -5,5 +5,7 @@
 
 ifup -a
 resolvconf -u
-sudo wg-quick up wg0  
-sudo wg
+wg-quick up wg0  
+wg
+
+
