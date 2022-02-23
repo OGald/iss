@@ -18,7 +18,7 @@ iface eth1 inet static
         netmask 255.255.255.224
         network 213.1.133.96
         broadcast 213.1.133.127
-        gateway 213.1.133.121
+        #gateway 213.1.133.121
 
 
         

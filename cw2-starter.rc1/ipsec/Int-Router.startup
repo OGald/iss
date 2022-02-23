@@ -10,6 +10,7 @@ resolvconf -u
 
 #Firewall rules allowing established connections to pass through
 iptables -F
+iptables -P FORWARD -j DROP
 iptables -I FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT
 
 #Allowing IPsec traffic to pass through
