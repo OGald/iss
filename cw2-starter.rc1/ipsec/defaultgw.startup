@@ -4,5 +4,6 @@
 
 #ip route add default via 192.168.87.9/24
 
+#Bringing up the interfaces set in /etc/network/interfaces
 ifup -a
 resolvconf -u
