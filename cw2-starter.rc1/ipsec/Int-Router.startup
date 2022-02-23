@@ -20,6 +20,4 @@ iptables -A FORWARD -i eth1 -p udp --dport 53 -j ACCEPT
 iptables -t nat -A PREROUTING -i eth1 -p tcp --dport 53 -j DNAT --to-destination 192.168.87.4
 iptables -t nat -A PREROUTING -i eth1 -p udp --dport 53 -j DNAT --to-destination 192.168.87.4
 
-#iptables -t nat -A PREROUTING -p all -i eth1 -d 213.1.133.99 -j DNAT --to-destination 192.168.87.2
-#iptables -t nat -A PREROUTING -p all -i eth1 -d 213.1.133.99 -j DNAT --to-destination 192.168.87.2
 
