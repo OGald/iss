@@ -3,8 +3,18 @@
 #ip link set up dev eth0
 #ip route add default via 242.142.188.1/27
 
+#Bringing up interfaces configured in /etc/network/interfaces
 ifup -a
 resolvconf -u
+
+#sudo wg-quick up wg0  
+#sudo wg
+
+
+#Starting services for strongswan
+systemctl start ipsec.service
+systemctl start strongswan-starter
+
 wg-quick up wg0  
 wg
 

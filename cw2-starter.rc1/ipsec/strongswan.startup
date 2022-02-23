@@ -2,13 +2,25 @@
 #ip link set up dev eth1
 #ip route add default via 192.168.87.9
 
+# Bringing up the network cards configured in /etc/network/interfaces
 ifup -a
 resolvconf -u
 
+# Allowing IPsec tunnel traffic destined for ports 500,4500
 iptables -A INPUT -p udp --dport 500 -j ACCEPT
 iptables -A INPUT -p udp --dport 4500 -j ACCEPT
 
-iptables -t nat -A POSTROUTING -o eth0 -s 242.142.188.2 -j ACCEPT
-iptables -t nat -A POSTROUTING -o eth0 -s 242.142.188.2 -j MASQUERADE
+# Allowing ipsec ESP traffic as part of the IPsec protocol suite
+iptables -A FORWARD -o eth0 -s 242.142.188.2 --match policy --pol ipsec --dir in --proto esp -j ACCEPT
+iptables -A FORWARD -o eth0 -s 242.142.188.2 --match policy --pol ipsec --dir out --proto esp -j MASQUERADE
 
+# DNAT so the firewall can route traffic between VPN clients and internet
+iptables -t nat -A POSTROUTING -s 242.142.188.2 -o eth0 -m policy --pol ipsec --dir out -j ACCEPT
+iptables -t nat -A POSTROUTING -s 242.142.188.2 -o eth0 -j MASQUERADE
+
+# Adjusts maximum packet size
+iptables -t mangle -A FORWARD --match policy --pol ipsec --dir in -s 242.142.188.2 -o eth0 -p tcp -m tcp --tcp-flags SYN,RST SYN -m tcpmss --mss 1361:1536 -j TCPMSS --set-mss 1360
+
+# Starting services used for strongswan
 systemctl start ipsec.service
+systemctl start strongswan-starter

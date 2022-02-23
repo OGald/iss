@@ -6,20 +6,20 @@
 ipsec pki --gen \
   --type rsa \
   --size 1024 \
-  --outform der > private/CA_Key.der
+  --outform pem > private/CA_key.der
   
-chmod 600 private/CA_Key.der
+chmod 600 private/CA_key.der
 
 # generate root CA's self-signed cert, related to the private key
 ipsec pki --self --ca \
   --lifetime 3650 \
-  --in private/CA_Key.der \
+  --in private/CA_Key.pem \
   --type rsa \
-  --dn "C=UK, O=University of Warwick - Cyber Security Centre, OU=Cyber Teaching Examples, CN=(Untrustworthy) CSC Tutorial Certificate Authority" \
-  --outform der > cacerts/CA_Cert.der
+  --dn "C=UK, O=Uni of Warwick, OU=CSC CN=CA.irony.cyber.test" \
+  --outform pem > cacerts/CA_cert.pem
 
 # verify it looks right
-ipsec pki --print --in cacerts/CA_Cert.der
+ipsec pki --print --in cacerts/CA_cert.pem
 
 #########################################
 ## for one end of the VPN (rA in our case)
@@ -28,73 +28,73 @@ ipsec pki --print --in cacerts/CA_Cert.der
 ipsec pki --gen \
   --type rsa \
   --size 1024 \
-  --outform der > private/vpn_rA_Key.der
+  --outform pem > private/strongswan_key.pem
   
-chmod 600 private/vpn_rA_Key.der
+chmod 600 private/strongswan_key.pem
 
 # generate the related cert signing request
 ipsec pki --pub \
-  --in private/vpn_rA_Key.der \
+  --in private/strongswan_key.pem \
   --type rsa \
-  --outform der > csr/vpn_rA_csr.der
+  --outform pem > reqs/strongswan_req.pem
 
 ################################################
 # then get it signed / issued as a certificate by the CA
 # note the common name CN or the subject alternate name (--san)
 # MUST match the public domain name or ip addr of the server
 ipsec pki --issue \
-  --in csr/vpn_rA_csr.der \
+  --in reqs/strongswan_req.pem \
   --lifetime 365 \
-  --cacert cacerts/CA_Cert.der \
-  --cakey private/CA_Key.der \
-  --dn "C=UK, O=CSC at Uni of Warwick, OU=Cyber Teaching Examples, CN=ra.cyber.test" \
-  --san 198.51.100.1  \
-  --san @198.51.100.1 \
+  --cacert cacerts/CA_cert.pem \
+  --cakey private/CA_key.pem \
+  --dn "C=UK, O=Uni of Warwick, OU=CSC CN=gw1.irony.cyber.test" \
+  --san 192.168.87.2  \
+  --san @192.168.87.2  \
   --flag serverAuth \
   --flag ikeIntermediate \
-  --outform der > certs/vpn_rA_Cert.der
+  --outform pem > certs/strongswan_cert.pem
   
 # see how it looks
-ipsec pki --print --in certs/vpn_rA_Cert.der
+ipsec pki --print --in certs/strongswan_cert.pem
 
 # or with openssl
-openssl x509 -inform DER -in certs/vpn_rA_Cert.der -noout -text
+openssl x509 -inform DER -in certs/strongswan_cert.pem -noout -text
 
 ##################################
-# do similar for the other end of the vpn ie rB
+# do similar for client side (hotel1)
 
-# generate the private key for other end of the vpn
+# generate the private key for VPN client
 ipsec pki --gen \
   --type rsa \
   --size 1024 \
-  --outform der > private/vpn_rB_Key.der
+  --outform pem > private/hotel1_key.pem
 
 # generate the related cert signing requestadf
 ipsec pki --pub \
-  --in private/vpn_rB_Key.der \
+  --in private/hotel1_key.pem \
   --type rsa \
-  --outform der > csr/vpn_rB_csr.der
+  --outform pem > reqs/hotel1_req.pem
 
 ################################################
 # then get it signed / issued as a certificate by the CA
 # note the common name CN or the subject alternate name (--san)
 # MUST match the public domain name or ip addr of the server
 ipsec pki --issue \
-  --in csr/vpn_rB_csr.der \
+  --in reqs/hotel1_req.pem \
   --lifetime 365 \
-  --cacert cacerts/CA_Cert.der \
-  --cakey private/CA_Key.der \
-  --dn "C=UK, O=CSC at Uni of Warwick, OU=Cyber Teaching Examples, CN=rb.cyber.test" \
-  --san 198.51.100.2  \
-  --san @198.51.100.2 \
+  --cacert cacerts/CA_cert.pem \
+  --cakey private/CA_Key.pem \
+  --dn "C=UK, O=Uni of Warwick, OU=CSC CN=hotel1.irony.cyber.test" \
+  --san 242.142.188.2  \
+  --san @242.142.188.2 \
   --flag serverAuth \
   --flag ikeIntermediate \
-  --outform der > certs/vpn_rB_Cert.der
+  --outform pem > certs/hotel1_cert.pem
   
 # see how it looks
-ipsec pki --print --in certs/vpn_rB_Cert.der
+ipsec pki --print --in certs/hotel1_cert.pem
 
 # or with openssl
-openssl x509 -inform DER -in certs/vpn_rB_Cert.der -noout -text
+openssl x509 -inform PEM -in ccerts/hotel1_cert.pem -noout -text
 
 

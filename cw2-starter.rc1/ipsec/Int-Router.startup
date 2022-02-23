@@ -4,13 +4,24 @@
 #ip link set up dev eth1
 #ip route add default via 213.1.133.121
 
-
+#Bringing up interfaces configured in /etc/network/interfaces
 ifup -a
 resolvconf -u
 
+#Firewall rules allowing established connections to pass through
 iptables -F
+iptables -P FORWARD -j DROP
 iptables -I FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT
 
+#Allowing IPsec traffic to pass through
+iptables -A FORWARD -p udp --dport 500 -j ACCEPT
+iptables -A FORWARD -p udp --dport 4500 -j ACCEPT
+
+#Allows tcp/udp traffic through
+iptables -A FORWARD -i eth1 -p tcp --dport 53 -j ACCEPT
+iptables -A FORWARD -i eth1 -p udp --dport 53 -j ACCEPT
+
+#DNAT sending packets using tcp/udp to DNS server
 iptables -A FORWARD -i eth0 -j ACCEPT
 
 iptables -A FORWARD -i eth1 -p tcp --dport 53 -j ACCEPT
