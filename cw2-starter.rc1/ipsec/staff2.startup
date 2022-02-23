@@ -5,6 +5,4 @@
 
 
 ifup -a
-systemd-resolved=false
 resolvconf -u
-

@@ -15,7 +15,3 @@ resolvconf -u
 systemctl start ipsec.service
 systemctl start strongswan-starter
 
-wg-quick up wg0  
-wg
-
-
