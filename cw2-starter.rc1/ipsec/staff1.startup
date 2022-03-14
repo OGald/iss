@@ -5,4 +5,4 @@
 
 
 ifup -a
-resolvconf -u
+#resolvconf -u

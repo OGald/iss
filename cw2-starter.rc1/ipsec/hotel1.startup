@@ -5,7 +5,7 @@
 
 #Bringing up interfaces configured in /etc/network/interfaces
 ifup -a
-resolvconf -u
+#resolvconf -u
 
 #sudo wg-quick up wg0  
 #sudo wg

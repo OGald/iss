@@ -5,7 +5,7 @@
 
 
 ifup -a
-resolvconf -u
+#resolvconf -u
 
 a2enmod ssl
 a2ensite default-ssl

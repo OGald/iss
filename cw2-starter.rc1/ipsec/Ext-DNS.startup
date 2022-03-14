@@ -5,6 +5,6 @@
 #ip route add default via 8.8.8.8/24
 
 ifup -a
-resolvconf -u
+#resolvconf -u
 
 service dnsmasq start

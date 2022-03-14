@@ -6,7 +6,7 @@
 
 #Bringing up interfaces configured in /etc/network/interfaces
 ifup -a
-resolvconf -u
+#resolvconf -u
 
 #Firewall rules allowing established connections to pass through
 iptables -F

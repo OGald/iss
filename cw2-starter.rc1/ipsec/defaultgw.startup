@@ -6,4 +6,4 @@
 
 #Bringing up the interfaces set in /etc/network/interfaces
 ifup -a
-resolvconf -u
+#resolvconf -u

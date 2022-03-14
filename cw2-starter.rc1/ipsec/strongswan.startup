@@ -4,7 +4,7 @@
 
 # Bringing up the network cards configured in /etc/network/interfaces
 ifup -a
-resolvconf -u
+#resolvconf -u
 
 # Allowing IPsec tunnel traffic destined for ports 500,4500
 iptables -A INPUT -p udp --dport 500 -j ACCEPT

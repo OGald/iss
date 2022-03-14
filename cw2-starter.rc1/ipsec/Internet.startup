@@ -9,7 +9,7 @@
 
 
 ifup -a
-resolvconf -u
+#resolvconf -u
 ip route add default via 213.1.133.120
 
 iptables -F
