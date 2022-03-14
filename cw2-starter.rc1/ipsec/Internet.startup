@@ -10,27 +10,27 @@
 
 ifup -a
 resolvconf -u
-ip route add default via 213.1.133.120
 
-iptables -F
 
-iptables -I FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT
+#iptables -F
+
+#iptables -I FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT
+
+iptables -A FORWARD -i eth0 -d 242.142.188.2 -j ACCEPT
 
 #DNS
-iptables -A FORWARD -i eth0 -p tcp --dport 53 -j ACCEPT
-iptables -A FORWARD -i eth0 -p udp --dport 53 -j ACCEPT
+#iptables -A FORWARD -i eth0 -p tcp --dport 53 -j ACCEPT
+#iptables -A FORWARD -i eth0 -p udp --dport 53 -j ACCEPT
 
 #Int-WWW
-iptables -A FORWARD -i eth0 -p tcp --dport 80 -j ACCEPT
-iptables -A FORWARD -i eth0 -p tcp --dport 443 -j ACCEPT
+#iptables -A FORWARD -i eth0 -p tcp --dport 80 -j ACCEPT
+#iptables -A FORWARD -i eth0 -p tcp --dport 443 -j ACCEPT
 
-iptables -A FORWARD -i eth2 -p tcp --dport 80 -j ACCEPT
-iptables -A FORWARD -i eth2 -p tcp --dport 443 -j ACCEPT
+#iptables -A FORWARD -i eth2 -p tcp --dport 80 -j ACCEPT
+#iptables -A FORWARD -i eth2 -p tcp --dport 443 -j ACCEPT
 
-iptables -t nat -A PREROUTING -i eth2 -p icmp  -d 213.1.133.98 -j DNAT --to-destination 192.168.87.2
-iptables -t nat -A PREROUTING -i eth2 -p icmp  -d 213.1.133.99 -j DNAT --to-destination 192.168.87.3
-iptables -t nat -A PREROUTING -i eth2 -p icmp  -d 213.1.133.102 -j DNAT --to-destination 192.168.87.1
-
-
-
+route add 213.1.133.98 gw 213.1.133.120
+route add 213.1.133.99 gw 213.1.133.120
+route add 213.1.133.102 gw 213.1.133.120
+route add default gw 213.1.133.120
 

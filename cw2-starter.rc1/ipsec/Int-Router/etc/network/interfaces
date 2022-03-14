@@ -20,5 +20,41 @@ iface eth1 inet static
         broadcast 213.1.133.127
         #gateway 213.1.133.121
 
+#Strongswan
+#auto eth1
+#iface eth1 inet static
+     #   address 213.1.133.98
+    #    netmask 255.255.255.224
+   #     network 213.1.133.96
+  #      broadcast 213.1.133.127
+ #       #gateway 213.1.133.121
+
+#Wireguard
+#auto eth1
+#iface eth1 inet static
+    #    address 213.1.133.99
+   #     netmask 255.255.255.224
+  #      network 213.1.133.96
+ #       broadcast 213.1.133.127
+        #gateway 213.1.133.121
+
+#www
+#auto eth1
+#iface eth1 inet static
+        #address 213.1.133.100
+        #netmask 255.255.255.224
+        #n#etwork 213.1.133.96
+        #broadcast 213.1.133.127
+        #gateway 213.1.133.121
+        
+#www
+#auto eth1
+#iface eth1 inet static
+     #   address 213.1.133.101
+      #  netmask 255.255.255.224
+       # network 213.1.133.96
+       # broadcast 213.1.133.127
+        #gateway 213.1.133.121
+
 
         

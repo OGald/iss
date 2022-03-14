@@ -4,6 +4,18 @@
 
 ifup -a
 resolvconf -u
+
+sudo ufw allow 51820/udp   #opens udp port 
+sudo ufw allow OpenSSH     #allows use of ssh port
+
+sudo ufw enable  #loads ufw files
+
+sudo systemctl enable wg-quick@wg0.service   #enables the service on the wg0 tunnel
+sudo systemctl start wg-quick@wg0.service    #starts the service on the wg0 tunnel
+
 wg-quick up wg0   
 
+# all traffic coming from a virtual ip assigned by ipsec, SNAT to ip of this server
+# this ensures that all replies are encapsulated i.e. come back through the vpn server
+iptables -t nat -A POSTROUTING -s 192.168.87.10/26 -j SNAT --to 192.168.87.3
 

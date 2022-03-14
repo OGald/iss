@@ -7,8 +7,8 @@
 ifup -a
 resolvconf -u
 
-#sudo wg-quick up wg0  
-#sudo wg
+sudo wg-quick up wg0  
+sudo wg
 
 
 #Starting services for strongswan
