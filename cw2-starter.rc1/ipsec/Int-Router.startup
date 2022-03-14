@@ -22,7 +22,6 @@ iptables -t nat -A PREROUTING -d 213.1.133.99 -j DNAT --to-destination 192.168.8
 iptables -t nat -A PREROUTING -d 213.1.133.102 -j DNAT --to-destination 192.168.87.1
 #iptables -t nat -A PREROUTING -i eth2 -p icmp  -d 213.1.133.102 -j DNAT --to-destination 192.168.87.1
 
-
 #Firewall rules allowing established connections to pass through
 iptables -F
 iptables -P FORWARD -j DROP

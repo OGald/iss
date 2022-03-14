@@ -12,6 +12,6 @@ sudo wg
 
 
 #Starting services for strongswan
-systemctl start ipsec.service
-systemctl start strongswan-starter
+#systemctl start ipsec.service
+#systemctl start strongswan-starter
 
