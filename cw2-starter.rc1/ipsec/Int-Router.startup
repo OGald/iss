@@ -6,8 +6,8 @@ ip link set up dev eth0
 
 ip addr add 213.1.133.120/27 dev eth1
 ip link set up dev eth1
+ip route add default via 213.1.133.121 dev eth1
 
-ip route add default via 213.1.133.121
 
 resolvconf -u
 
@@ -23,6 +23,9 @@ iptables -t nat -A PREROUTING -d 213.1.133.99 -j DNAT --to-destination 192.168.8
 #Default gw
 iptables -t nat -A PREROUTING -d 213.1.133.102 -j DNAT --to-destination 192.168.87.1
 #iptables -t nat -A PREROUTING -i eth2 -p icmp  -d 213.1.133.102 -j DNAT --to-destination 192.168.87.1
+
+iptables -A FORWARD -d 192.168.87.6 -j DROP 
+iptables -A FORWARD -d 192.168.87.7 -j DROP
 
 #Firewall rules allowing established connections to pass through
 #iptables -F
