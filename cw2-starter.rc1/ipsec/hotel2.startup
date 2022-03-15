@@ -5,4 +5,5 @@ ip link set up dev eth0
 ip route add default via 242.142.188.1
 
 resolvconf -u
-
+sudo wg-quick up wg0  
+sudo wg
