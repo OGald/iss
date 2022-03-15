@@ -1,8 +1,9 @@
-#ip addr add 192.168.87.3/24 dev eth0
-#ip link set up dev eth0
-#ip route add default via 192.168.87.9
+ip link set dev eth0 address c0:c0:cc:cc:cc:cc
+ip addr add 192.168.87.3/24 dev eth0
+ip link set up dev eth0
 
-ifup -a
+ip route add default via 192.168.87.9
+
 resolvconf -u
 
 sudo ufw allow 51820/udp   #opens udp port 
